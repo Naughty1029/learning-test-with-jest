@@ -81,3 +81,18 @@ const can2: CanType = {
  test("can2とcan4はtoEqualで比較する",()=>{
   expect(can2).toEqual(can4);
 })
+
+test("can2とcan4はtoStrictEqualで比較する",()=>{
+  expect(can2).not.toStrictEqual(can4);
+})
+
+/**
+■ toBe、toEqual、toStrictEqual の使い分け
+■ toBe を利用するケース
+・ プリミティブ値を評価
+・ 同じオブジェクトの参照を持つ変数であることを評価（例えば引数として渡したオブジェクトの変数がリターンされることを確認するなど）
+■ toEqual を利用するケース
+・ オブジェクトのプロパティの値の評価
+■ toStrictEqual を利用するケース
+・ 生成元のクラス名や undefined なプロパティ、配列内の未定義の要素と undefined の評価を含めた厳密なオブジェクトの評価
+ */
