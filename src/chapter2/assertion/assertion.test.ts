@@ -98,11 +98,10 @@ test("can2とcan4はtoStrictEqualで比較する",()=>{
  */
 
 // 曖昧な真偽値の評価
-test("曖昧な真偽値の評価",()=>{
+describe("曖昧な真偽値の評価",()=>{
   test("'0'は turthy である",()=>{
     expect('0').toBeTruthy();
   })
-
   test("0は falsy である",()=>{
     expect(0).toBeFalsy();
   })
