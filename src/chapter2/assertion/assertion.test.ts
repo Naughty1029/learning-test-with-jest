@@ -172,3 +172,33 @@ describe("数値の評価",()=>{
     expect(0.1 + 0.2).toBeLessThanOrEqual(0.30000000000000004)
   })
 })
+
+// 文字列の部分一致（正規表現）
+describe("文字列の部分一致（正規表現）",()=>{
+  const log1 = '10.0.0.3 - - [30/Jan/2023:12:20:12 +0000] "GET / HTTP/1.1" 200 615 "-" "curl/7.74.0" "-"'
+  const log2 = '10.0.0.11 - - [30/Jan/2023:12:20:40 +0000] "GET / HTTP/1.1" 200 615 "-" "curl/7.74.0" "-"'
+  const log3 = '10.0.0.99 - - [30/Jan/2023:12:20:40 +0000] "GET / HTTP/1.1" 200 615 "-" "curl/7.74.0" "-"'
+  
+  test("IPアドレス'10.0.0.3'が含まれていることを評価する",()=>{
+    expect(log1).toEqual(expect.stringContaining('10.0.0.3'))
+  })
+  
+  test(" 10.0.0.0から10.0.0.99までのIPアドレスが含まれていることを評価する",()=>{
+    const expected = /^10.0.0.([1-9]?[0-9])/
+    // expect.stringMatching
+    expect(log1).toEqual(expect.stringMatching(expected))
+    expect(log2).toEqual(expect.stringMatching(expected))
+    expect(log3).toEqual(expect.stringMatching(expected))
+  
+    // toMatch
+    expect(log1).toMatch(expected);
+    expect(log2).toMatch(expected);
+    expect(log3).toMatch(expected);
+  
+    //toBe
+    const reqex =  new RegExp(expected);
+    expect(reqex.test(log1)).toBe(true);
+    expect(reqex.test(log2)).toBe(true);
+    expect(reqex.test(log3)).toBe(true);
+  })
+})
