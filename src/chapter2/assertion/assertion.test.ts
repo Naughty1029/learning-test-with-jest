@@ -106,3 +106,16 @@ describe("曖昧な真偽値の評価",()=>{
     expect(0).toBeFalsy();
   })
 })
+
+//  null、undefined の評価
+describe("null、undefined の評価",()=>{
+  test("nullの評価",()=>{
+    expect(null).toBe(null);
+    expect(null).toBeNull();
+  })
+  
+  test("undefinedの評価",()=>{
+    expect(undefined).toBe(undefined);
+    expect(undefined).toBeUndefined();
+  })
+})
