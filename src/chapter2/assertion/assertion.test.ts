@@ -96,3 +96,14 @@ test("can2とcan4はtoStrictEqualで比較する",()=>{
 ■ toStrictEqual を利用するケース
 ・ 生成元のクラス名や undefined なプロパティ、配列内の未定義の要素と undefined の評価を含めた厳密なオブジェクトの評価
  */
+
+// 曖昧な真偽値の評価
+test("曖昧な真偽値の評価",()=>{
+  test("'0'は turthy である",()=>{
+    expect('0').toBeTruthy();
+  })
+
+  test("0は falsy である",()=>{
+    expect(0).toBeFalsy();
+  })
+})
