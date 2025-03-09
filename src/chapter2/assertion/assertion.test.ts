@@ -119,3 +119,24 @@ describe("null、undefined の評価",()=>{
     expect(undefined).toBeUndefined();
   })
 })
+
+//曖昧な結果の評価
+describe("曖昧な結果の評価",()=>{
+  const hoge = () => (
+    {
+      hoge:"hogehoge",
+      number: 0
+    }
+  )
+  test("hoge関数が何かしらをリターンすることを評価する",()=>{
+    // 期待値がnullやundefinedではないことを評価
+    expect(hoge()).toEqual(expect.anything())
+    // 期待値のプロパティhogeがString型 numberがNumber型であることを評価
+    expect(hoge()).toEqual({
+      hoge: expect.any(String),
+      number: expect.any(Number)
+    })
+  })
+
+
+})
