@@ -32,3 +32,52 @@ test("toStrictEqualでプリミティブな値を比較する",()=> {
   expect(stringValue).toStrictEqual("文字列");
   expect(booleanValue).toStrictEqual(true);
 })
+
+//オブジェクトの比較
+type CanType = {
+  flavor: string;
+  ounces: number;
+}
+
+const can1: CanType = {
+ flavor: "grapefruit",
+ ounces: 12 
+}
+
+const can2: CanType = {
+  flavor: "grapefruit",
+  ounces: 12 
+ }
+
+ const can3: CanType = can2;
+
+ class Can {
+  flavor: string;
+  ounces: number;
+
+  constructor({flavor, ounces}: CanType) {
+    this.flavor = flavor;
+    this.ounces = ounces;
+  }
+ }
+
+ const can4 = new Can({
+  flavor: "grapefruit",
+  ounces: 12 
+ });
+
+ test(" can1 と can2 は厳密的に同じインスタンスでないと評価される",()=>{
+    expect(can1).not.toBe(can2);
+ })
+
+ test(" can2 と can3 は厳密的に同じインスタンスである",()=>{
+  expect(can2).toBe(can3);
+ })
+
+ test("can1とcan2はtoEqualで比較する",()=>{
+   expect(can1).toEqual(can2);
+ })
+
+ test("can2とcan4はtoEqualで比較する",()=>{
+  expect(can2).toEqual(can4);
+})
