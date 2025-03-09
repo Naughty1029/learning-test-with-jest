@@ -144,6 +144,31 @@ describe("曖昧な結果の評価",()=>{
       number: expect.any(Number)
     })
   })
+})
 
+//数値の評価
+describe("数値の評価",()=>{
+  test("0.1 + 0.2が0.3を返さないことを評価する",()=>{
+    //結果は「0.30000000000000004」となる
+    //IEEE 754 倍精度浮動小数点数であることが原因
+    expect(0.1 + 0.2).not.toBe(0.3);
+    // toBeCloseToを利用すると、第二引数に指定した数値に近いかどうかを評価する（デフォルトでは小数点以下2桁までを評価する）
+    expect(0.1 + 0.2).toBeCloseTo(0.3);
+  })
 
+  //toBeLessThan、toBeLessThanOrEqual、toBeGreaterThan、toBeGreaterThanOrEqual
+  test('0.1 + 0.2 が 0.3より多いことを評価する', () => {
+    expect(0.1 + 0.2).toBeGreaterThan(0.3)
+  })
+  test('0.1 + 0.2 が 0.3以上であることを評価する', () => {
+    expect(0.1 + 0.2).toBeGreaterThanOrEqual(0.3)
+    expect(0.1 + 0.2).toBeGreaterThanOrEqual(0.30000000000000004)
+  })
+  test('0.1 + 0.2 が 0.4より小さいことを評価する', () => {
+    expect(0.1 + 0.2).toBeLessThan(0.4)
+  })
+  test('0.1 + 0.2 が 0.4以下であることを評価する', () => {
+    expect(0.1 + 0.2).toBeLessThanOrEqual(0.4)
+    expect(0.1 + 0.2).toBeLessThanOrEqual(0.30000000000000004)
+  })
 })
