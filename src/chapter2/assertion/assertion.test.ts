@@ -202,3 +202,42 @@ describe("文字列の部分一致（正規表現）",()=>{
     expect(reqex.test(log3)).toBe(true);
   })
 })
+
+//配列の部分一致
+describe("配列の部分一致",()=>{
+  //配列の要素がプリミティブ型の場合
+  const fruitList = ['apple', 'banana', 'grape', 'orange', 'peach', 'strawberry'];
+  test("appleが含まれていることを評価する",()=>{
+    expect(fruitList).toContain("apple");
+  })
+  test("appleとbananaが含まれていることを評価する",()=>{
+    expect(fruitList).toEqual(expect.arrayContaining(["apple","banana"]));
+  })
+
+  //配列の要素がオブジェクトの場合
+  const itemList = [
+    {
+      name: 'apple',
+      price: 100
+    },
+    {
+      name: 'banana',
+      price: 200
+    },
+    {
+      name: 'grape',
+      price: 300
+    }
+  ]
+
+  test("appleが含まれていることを評価する",()=>{
+    expect(itemList).toContainEqual({name:"apple",price:100});
+  })
+
+  test("appleとbananaが含まれていることを評価する",()=>{
+    expect(itemList).toEqual(expect.arrayContaining([
+      {name:"apple",price:100},
+      {name:"banana",price:200}
+    ]));
+  })
+})
