@@ -241,3 +241,41 @@ describe("配列の部分一致",()=>{
     ]));
   })
 })
+
+//オブジェクトの部分一致
+describe("オブジェクトの部分一致",()=>{
+  const ciBuild = {
+    number: 1,
+    duration: 12000,
+    state: 'success',
+    triggerParameters: {
+      is_scheduled: true,
+    },
+    type: 'scheduled_pipeline',
+    actor: {
+      login: 'Taka',
+    },
+  }
+
+  // 1つのプロパティを検証
+  test('stateプロパティのバリューがsuccessであること', ()=> {
+    expect(ciBuild).toHaveProperty('state', 'success');
+  })
+
+  //ネストしたプロパティを検証
+  test('actorプロパティがTakaであること',()=> {
+    expect(ciBuild).toHaveProperty('actor.login','Taka');
+  })
+
+  // 複数のプロパティを検証
+  test('scheduled pipelineを検証',()=> {
+    expect(ciBuild).toEqual(
+      expect.objectContaining({
+        triggerParameters: {
+          is_scheduled: true,
+        },
+        type: 'scheduled_pipeline',
+      })
+    )
+  })
+})
