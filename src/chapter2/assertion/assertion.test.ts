@@ -312,3 +312,19 @@ describe("Callback 関数を利用した非同期な関数の結果の評価",()
     }
   )})
 });
+
+
+describe("Promise を利用した非同期な関数の結果の評価",()=> {
+  // Promise を利用した非同期な関数の結果の評価
+  const fetchDataWithPromiseResolve = () => 
+     new Promise(resolve => setTimeout(resolve, 3000, 'fetch data'));
+  // .resolves マッチャを利用した非同期な関数の結果の評価
+  test('return fetch data', () => {
+    return expect(fetchDataWithPromiseResolve()).resolves.toBe('fetch data');
+  })
+
+  // async/await を利用した非同期な関数の結果の評価
+  test('return lemon with async/await',async()=>{
+    await expect(fetchDataWithPromiseResolve()).resolves.toBe('fetch data');
+  })
+});
