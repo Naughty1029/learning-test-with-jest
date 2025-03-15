@@ -279,3 +279,22 @@ describe("オブジェクトの部分一致",()=>{
     )
   })
 })
+
+//Errorの評価
+class User {
+  name: string;
+  password: string;
+  constructor(name: string, password: string) {
+    if(password.length < 6) throw new Error('Password is too short');
+    this.name = name;
+    this.password = password;
+  }
+}
+
+describe("Errorの評価",()=>{
+  test("パスワードが6文字未満の場合にエラーが発生することを評価する",()=>{
+    expect(() => new User('Taka','12345')).toThrow();
+    expect(() => new User('Taka','12345')).toThrow(Error);
+    expect(() => new User('Taka','12345')).toThrow('Password is too short');
+  });
+})
