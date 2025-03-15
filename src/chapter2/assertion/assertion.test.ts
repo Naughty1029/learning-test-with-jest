@@ -298,3 +298,17 @@ describe("Errorの評価",()=>{
     expect(() => new User('Taka','12345')).toThrow('Password is too short');
   });
 })
+
+// Callback 関数を利用した非同期な関数の結果の評価
+const fetchDataWithCallback = (callback: (data: string) => void) => {
+  setTimeout(callback, 3000, 'fetch data');
+}
+
+describe("Callback 関数を利用した非同期な関数の結果の評価",()=> {
+  test('return fetch data', (done) => {
+    fetchDataWithCallback((data) => {
+      expect(data).toBe('fetch data');
+      done(); // doneを呼び出すことで非同期処理が完了したことをJestに通知する
+    }
+  )})
+});
