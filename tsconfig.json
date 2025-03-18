@@ -4,6 +4,7 @@
   "compilerOptions": {
     "preserveConstEnums": true,
     "esModuleInterop": true,
+    "jsx": "react-jsx", /* Specify what JSX code is generated. */
   },
   "include": ["src/**/*"],
   "exclude": ["node_modules", "**/*.spec.ts"],
